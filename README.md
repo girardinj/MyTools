@@ -1,6 +1,7 @@
 # Index
   - [Markdown-to-html](#Markdown-to-html)
   - [MTB](#MyToolsBox)
+  - [Author](#author)
 
 # Introduction
 This is a set of tools I created for myself by myself
@@ -19,3 +20,5 @@ this is a little program adding command stuff to easier and unite commands
   -cc this counts chars of given file
   -cl this counts lines of given file
   
+#Author
+[_Girardin Jarod_](@girardinj)
