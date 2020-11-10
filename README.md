@@ -21,4 +21,4 @@ this is a little program adding command stuff to easier and unite commands
   -cl this counts lines of given file
   
 #Author
-[_Girardin Jarod_](@girardinj)
+[_Girardin Jarod_](https://github.com/girardinj)
