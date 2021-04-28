@@ -3,4 +3,4 @@ project(MTB)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(MTB main.cpp mtb.cpp mtb.h ENUM_PARAMS.h)
+add_executable(MTB main.cpp mtb.cpp mtb.h ENUM_PARAMS.h os_helper.cpp os_helper.h)
