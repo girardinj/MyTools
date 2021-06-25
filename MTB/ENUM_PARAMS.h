@@ -13,6 +13,7 @@ enum PARAMS {
     FILE_COUNT_LINE,
     FILE_GET_INFO,
     TASK_KILL,
+    TEST
 };
 
 int getParam(int argc, char** argv) {
@@ -20,6 +21,8 @@ int getParam(int argc, char** argv) {
 
     if (param == "-h")
         return HELP;
+    if (param == "-test")
+        return TEST;
 
     // from now, we need (at least) two arguments
     if (argc < 3    )

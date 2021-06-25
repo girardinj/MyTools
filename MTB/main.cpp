@@ -2,9 +2,21 @@
 #include <iostream>
 #include "ENUM_PARAMS.h"
 
+void f_debug(int &argc, char** &argv) {
+    argc = 2;
+    char var[] = "hi";
+    char* c = argv[0];
+
+    argv = new char*[argc];
+
+    argv[0] = c;
+    argv[1] = var;
+}
 
 int main(int argc, char** argv)
 {
+    //f_debug(argc, argv);
+
     if (argc <= 1)
     {
         MTB::help();
@@ -46,6 +58,11 @@ int main(int argc, char** argv)
         // -tk
         case TASK_KILL:
             MTB::taskKill(argv[2]);
+            break;
+
+        // -test
+        case TEST:
+            MTB::test();
             break;
 
         // default

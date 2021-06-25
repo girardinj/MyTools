@@ -271,3 +271,7 @@ std::string MTB::getFirstWord(std::string line, int size){
 
     return arr[0];
 }
+
+void MTB::test(){
+    std::cout << "bonjour, je suis un joli test, comment allez-vous ?" << std::endl;
+}

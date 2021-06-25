@@ -3,14 +3,14 @@
 //
 
 #include "os_helper.h"
-
+#include <iostream>
 const std::string OSHelper::osNotSupported = "sorry OS not supported";
 bool OSHelper::OSError = false;
 
 std::istringstream OSHelper::getTasks(std::string taskName) {
     setOSError(false);
 #ifdef _WIN32
-    return std::istringstream(exec("tasklist | findstr " + taskName));
+    return std::istringstream(exec("tasklist | findstr /I " + taskName));
 #elif __linux__
     return std::istringstream();
 #else
@@ -24,7 +24,8 @@ std::string OSHelper::execTaskKill(std::string task_name, bool shouldForce) {
 
     std::string ret;
 #ifdef _WIN32
-    ret = (exec("tasklist | findstr " + task_name));
+    std::string b = shouldForce ? "/F " : "";
+    ret = exec("taskkill " + b + "/IM " + task_name);
 #elif __linux__
     // TODO
     std::cout << "implement in linux plz" << std::endl;
