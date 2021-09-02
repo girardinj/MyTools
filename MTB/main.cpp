@@ -57,9 +57,16 @@ int main(int argc, char** argv)
 
         // -tk
         case TASK_KILL:
-            MTB::taskKill(argv[2]);
+        {
+            std::string s = argv[ 2 ];
+            if (s == "-f" || s == "-F")
+            {
+                MTB::taskKill(argv[ 3 ], true);
+                break;
+            }
+            MTB::taskKill(argv[ 2 ], false);
             break;
-
+        }
         // -test
         case TEST:
             MTB::test();

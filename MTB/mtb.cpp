@@ -40,7 +40,7 @@ void MTB::help()
               " -cc FILE_PATH  count chars number of the file  \n"
               " -cl FILE_PATH  count lines number of the file  \n"
               " -info FILE_PATH  gives some informations about the file\n"
-              " -tk TASK_NAME  find task and kill it           \n"
+              " -tk (-f) TASK_NAME  find task and kill it (-f to auto force it\n"
               "                                                \n"
 
               << std::endl;
@@ -151,7 +151,7 @@ void MTB::file_info(std::string file_path) {
 }
 
 // https://stackoverflow.com/questions/5059049/read-a-string-line-by-line-using-c
-void MTB::taskKill(std::string taskName) {
+void MTB::taskKill(std::string taskName, bool isForced) {
     int i = 0;
 
     std::istringstream execRet = OSHelper::getTasks(taskName);
@@ -213,16 +213,19 @@ void MTB::taskKill(std::string taskName) {
 
     // https://stackoverflow.com/questions/43972500/how-to-only-accept-y-or-n-in-users-input-in-c
     char c = 0;
-    while (true)
-    {
-        std::cout << "Should force it? (y/n) ";
-        std::cin >> c;
-        c = tolower(c);
-        if (c == 'y' || c == 'n')
-            break;
+    if (isForced)
+        c = 'y';
+    else
+        while (true)
+        {
+            std::cout << "Should force it? (y/n) ";
+            std::cin >> c;
+            c = tolower(c);
+            if (c == 'y' || c == 'n')
+                break;
 
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
     bool shouldForce = (c == 'Y' || c == 'y');
 

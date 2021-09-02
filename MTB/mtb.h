@@ -15,7 +15,7 @@ public:
     static void file_countLines(std::string file_path);
     static void file_read(std::string file_path);
     static void file_info(std::string file_path);
-    static void taskKill(std::string task_name);
+    static void taskKill(std::string task_name, bool isForced);
     
     static void test();
 

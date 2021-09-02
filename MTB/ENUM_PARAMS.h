@@ -37,7 +37,12 @@ int getParam(int argc, char** argv) {
     if (param == "-info")
         return FILE_GET_INFO;
     if (param == "-tk")
+    {
+        std::string force = argv[2];
+        if ((force == "-f" || force == "-F") && argc < 4)
+            return INVALID_NUMBER_ARGUMENT;
         return TASK_KILL;
+    }
 
     return DEFAULT;
 }
