@@ -16,10 +16,12 @@ public:
     static void file_read(std::string file_path);
     static void file_info(std::string file_path);
     static void taskKill(std::string task_name, bool isForced);
+    static void delay(std::string appWithParam, unsigned int time);
     
     static void test();
 
 private:
     static std::string exec(std::string command);
+    static std::string execInNewWindow(std::string command);
     static std::string getFirstWord(std::string line, int size);
 };

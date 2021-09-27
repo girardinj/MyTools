@@ -13,6 +13,7 @@ enum PARAMS {
     FILE_COUNT_LINE,
     FILE_GET_INFO,
     TASK_KILL,
+    DELAY,
     TEST
 };
 
@@ -25,7 +26,7 @@ int getParam(int argc, char** argv) {
         return TEST;
 
     // from now, we need (at least) two arguments
-    if (argc < 3    )
+    if (argc < 3)
         return INVALID_NUMBER_ARGUMENT;
 
     if (param == "-r")
@@ -43,6 +44,12 @@ int getParam(int argc, char** argv) {
             return INVALID_NUMBER_ARGUMENT;
         return TASK_KILL;
     }
+
+    if (argc < 4)
+        return INVALID_NUMBER_ARGUMENT;
+
+    if (param == "-delay")
+        return DELAY;
 
     return DEFAULT;
 }

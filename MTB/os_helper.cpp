@@ -4,6 +4,10 @@
 
 #include "os_helper.h"
 #include <iostream>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 const std::string OSHelper::osNotSupported = "sorry OS not supported";
 bool OSHelper::OSError = false;
 
@@ -34,6 +38,12 @@ std::string OSHelper::execTaskKill(std::string task_name, bool shouldForce) {
     setOSError(true);
 #endif
     return ret;
+}
+
+void OSHelper::sleep(int milliSeconds) {
+#ifdef _WIN32
+    Sleep(milliSeconds);
+#endif
 }
 
 // https://www.tutorialspoint.com/How-to-execute-a-command-and-get-the-output-of-command-within-Cplusplus-using-POSIX
