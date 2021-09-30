@@ -41,6 +41,7 @@ void MTB::help()
               " -cl FILE_PATH  count lines number of the file  \n"
               " -info FILE_PATH  gives some informations about the file\n"
               " -tk (-f) TASK_NAME  find task and kill it (-f to auto force it)\n"
+              " -delay MINUTES APP delay the execution of a specified app in minutes\n"
               "                                                \n"
 
               << std::endl;
@@ -261,6 +262,12 @@ std::string MTB::exec(std::string command) {
     return result;
 }
 
+std::string MTB::execInNewWindow(std::string command) {
+#ifdef _WIN32
+    return exec("start " + command);
+#endif
+}
+
 // https://stackoverflow.com/questions/16029324/splitting-a-string-into-an-array-in-c-without-using-vector
 std::string MTB::getFirstWord(std::string line, int size){
     std::string arr[size];
@@ -273,6 +280,44 @@ std::string MTB::getFirstWord(std::string line, int size){
     }
 
     return arr[0];
+}
+
+void MTB::delay(std::string appWithParam, unsigned int time) {
+    // minutes
+    while (time > 1) {
+        std::string toPrint = "sleeping for " + std::to_string(time--) + " minutes";
+        std::cout << toPrint << std::endl;
+        OSHelper::sleep(60 * 10*10*10);
+        /*
+        std::cout << "\r";
+        for (int i = 0; i < toPrint.length(); ++i)
+            std::cout << " ";
+        std::cout << "\r";
+         */
+    }
+    std::cout << std::endl;
+
+    time = 60;
+    // secondes
+    while (time > 0) {
+        std::string toPrint = "sleeping for " + std::to_string(time) + " seconde";
+        if (time > 1)
+            toPrint += "s";
+        std::cout << toPrint << std::endl;
+        --time;
+        //OSHelper::sleep(10*10*10);
+        OSHelper::sleep(1);
+
+        /*
+        std::cout << "\r";
+        for (int i = 0; i < toPrint.length(); ++i)
+            std::cout << " ";
+        std::cout << "\r";
+         */
+    }
+    std::cout << std::endl;
+    std::cout << "executing " << appWithParam << std::endl;
+    execInNewWindow(appWithParam);
 }
 
 void MTB::test(){

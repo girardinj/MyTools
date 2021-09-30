@@ -13,6 +13,14 @@ void f_debug(int &argc, char** &argv) {
     argv[1] = var;
 }
 
+bool isInt(std::string s) {
+    for (char c : s) {
+        if (!std::isdigit((int)c))
+            return false;
+    }
+    return true;
+}
+
 int main(int argc, char** argv)
 {
     //f_debug(argc, argv);
@@ -73,6 +81,18 @@ int main(int argc, char** argv)
                 }
             }
             MTB::taskKill(argv[ 2 ], false);
+            break;
+        }
+
+        // -delay
+        case DELAY: {
+            char *ptr = nullptr;
+            if (!isInt(argv[2])) {
+                std::cout << "Time is invalid, use whole positive numbers !" << std::endl;
+                break;
+            }
+
+            MTB::delay(argv[3], atoi(argv[2]));
             break;
         }
         // -test
