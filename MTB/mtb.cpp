@@ -40,7 +40,7 @@ void MTB::help()
               " -cc FILE_PATH  count chars number of the file  \n"
               " -cl FILE_PATH  count lines number of the file  \n"
               " -info FILE_PATH  gives some informations about the file\n"
-              " -tk (-f) TASK_NAME  find task and kill it (-f to auto force it\n"
+              " -tk (-f) TASK_NAME  find task and kill it (-f to auto force it)\n"
               "                                                \n"
 
               << std::endl;

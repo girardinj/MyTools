@@ -25,7 +25,7 @@ int getParam(int argc, char** argv) {
         return TEST;
 
     // from now, we need (at least) two arguments
-    if (argc < 3    )
+    if (argc < 3)
         return INVALID_NUMBER_ARGUMENT;
 
     if (param == "-r")
@@ -38,8 +38,9 @@ int getParam(int argc, char** argv) {
         return FILE_GET_INFO;
     if (param == "-tk")
     {
-        std::string force = argv[2];
-        if ((force == "-f" || force == "-F") && argc < 4)
+        std::string force1 = argv[2];
+        std::string force2 = argv[2];
+        if (((force1 == "-f" || force1 == "-F") || (force2 == "-f" || force2 == "-F")) && argc < 4)
             return INVALID_NUMBER_ARGUMENT;
         return TASK_KILL;
     }

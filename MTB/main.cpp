@@ -58,11 +58,19 @@ int main(int argc, char** argv)
         // -tk
         case TASK_KILL:
         {
-            std::string s = argv[ 2 ];
-            if (s == "-f" || s == "-F")
+            if (argc >= 4)
             {
-                MTB::taskKill(argv[ 3 ], true);
-                break;
+                std::string s1 = argv[ 2 ];
+                std::string s2 = argv[ 2 ];
+                if (s1 == "-f" || s1 == "-F")
+                {
+                    MTB::taskKill(argv[ 3 ], true);
+                    break;
+                } else if (s2 == "-f" || s2 == "-F")
+                {
+                    MTB::taskKill(argv[ 2 ], true);
+                    break;
+                }
             }
             MTB::taskKill(argv[ 2 ], false);
             break;
