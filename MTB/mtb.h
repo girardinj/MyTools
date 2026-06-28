@@ -17,11 +17,13 @@ public:
     static void file_info(std::string file_path);
     static void taskKill(std::string task_name, bool isForced);
     static void delay(std::string appWithParam, unsigned int time);
+    static void createGit();
+    static void downloadWithYt_dlp(std::string url, bool asMp3);
     
     static void test();
 
 private:
     static std::string exec(std::string command);
-    static std::string execInNewWindow(std::string command);
+    static std::string execInWindow(std::string command, bool newWindow = true);
     static std::string getFirstWord(std::string line, int size);
 };

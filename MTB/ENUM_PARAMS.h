@@ -13,6 +13,8 @@ enum PARAMS {
     FILE_COUNT_LINE,
     FILE_GET_INFO,
     TASK_KILL,
+    GIT,
+    DOWNLOAD_WITH_YT_DLP,
     DELAY,
     TEST
 };
@@ -24,6 +26,8 @@ int getParam(int argc, char** argv) {
         return HELP;
     if (param == "-test")
         return TEST;
+    if (param == "-git")
+        return GIT;
 
     // from now, we need (at least) two arguments
     if (argc < 3)
@@ -45,7 +49,10 @@ int getParam(int argc, char** argv) {
             return INVALID_NUMBER_ARGUMENT;
         return TASK_KILL;
     }
+    if (param == "-dl")
+        return DOWNLOAD_WITH_YT_DLP;
 
+    // from now, we need (at least) three arguments
     if (argc < 4)
         return INVALID_NUMBER_ARGUMENT;
 

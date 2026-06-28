@@ -84,6 +84,22 @@ int main(int argc, char** argv)
             break;
         }
 
+        // -git
+        case GIT: {
+            MTB::createGit();
+            break;
+        }
+
+        // -dl
+        case DOWNLOAD_WITH_YT_DLP: {
+            std::string url = argv[2];
+            if (argc >= 4) {
+                std::string s1 = argv[3];
+                MTB::downloadWithYt_dlp(url, s1 == "mp3");
+            }
+            break;
+        }
+
         // -delay
         case DELAY: {
             char *ptr = nullptr;

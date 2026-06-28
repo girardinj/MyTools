@@ -1,0 +1,3 @@
+C:/mySoft/MyTools/MTB/build/CMakeFiles/MTB.dir
+C:/mySoft/MyTools/MTB/build/CMakeFiles/edit_cache.dir
+C:/mySoft/MyTools/MTB/build/CMakeFiles/rebuild_cache.dir

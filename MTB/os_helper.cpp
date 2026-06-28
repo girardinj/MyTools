@@ -40,12 +40,6 @@ std::string OSHelper::execTaskKill(std::string task_name, bool shouldForce) {
     return ret;
 }
 
-void OSHelper::sleep(int milliSeconds) {
-#ifdef _WIN32
-    Sleep(milliSeconds);
-#endif
-}
-
 // https://www.tutorialspoint.com/How-to-execute-a-command-and-get-the-output-of-command-within-Cplusplus-using-POSIX
 std::string OSHelper::exec(std::string command) {
     char buffer[128];

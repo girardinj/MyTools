@@ -11,7 +11,6 @@ class OSHelper
 public:
     static std::istringstream getTasks(std::string taskName);
     static std::string execTaskKill(std::string task_name, bool shouldForce);
-    static void sleep(int milliSeconds);
 
     static bool isOSError();
     static const std::string osNotSupported;

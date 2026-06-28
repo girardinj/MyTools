@@ -5,6 +5,8 @@
 #include <sstream>
 #include <vector>
 #include <limits>
+#include <thread>
+#include <chrono>
 
 #include "os_helper.h"
 
@@ -41,7 +43,9 @@ void MTB::help()
               " -cl FILE_PATH  count lines number of the file  \n"
               " -info FILE_PATH  gives some informations about the file\n"
               " -tk (-f) TASK_NAME  find task and kill it (-f to auto force it)\n"
-              " -delay MINUTES APP delay the execution of a specified app in minutes\n"
+              " -delay SECONDS APP delay the execution of a specified app in seconds\n"
+              " -git create a git repo\n"
+              " -dl URL FORMAT download from a link, optional arg: [mp3; mp4] (default is mp3) YT-DLP REQUIRED\n"
               "                                                \n"
 
               << std::endl;
@@ -262,9 +266,12 @@ std::string MTB::exec(std::string command) {
     return result;
 }
 
-std::string MTB::execInNewWindow(std::string command) {
+std::string MTB::execInWindow(std::string command, bool newWindow) {
 #ifdef _WIN32
-    return exec("start " + command);
+    if (newWindow)
+        return exec("start " + command);
+    else
+        return exec(command);
 #endif
 }
 
@@ -282,12 +289,13 @@ std::string MTB::getFirstWord(std::string line, int size){
     return arr[0];
 }
 
-void MTB::delay(std::string appWithParam, unsigned int time) {
+void MTB::delay(std::string appWithParam, unsigned int time_seconds) {
     // minutes
-    while (time > 1) {
-        std::string toPrint = "sleeping for " + std::to_string(time--) + " minutes";
+    while (time_seconds >= 60) {
+        std::string toPrint = "sleeping for " + std::to_string(time_seconds/60) + " minutes";
         std::cout << toPrint << std::endl;
-        OSHelper::sleep(60 * 10*10*10);
+        std::this_thread::sleep_for(std::chrono::seconds(60));
+        time_seconds -= 60;
         /*
         std::cout << "\r";
         for (int i = 0; i < toPrint.length(); ++i)
@@ -297,16 +305,14 @@ void MTB::delay(std::string appWithParam, unsigned int time) {
     }
     std::cout << std::endl;
 
-    time = 60;
     // secondes
-    while (time > 0) {
-        std::string toPrint = "sleeping for " + std::to_string(time) + " seconde";
-        if (time > 1)
+    while (time_seconds > 0) {
+        std::string toPrint = "sleeping for " + std::to_string(time_seconds) + " second";
+        if (time_seconds > 1)
             toPrint += "s";
         std::cout << toPrint << std::endl;
-        --time;
-        //OSHelper::sleep(10*10*10);
-        OSHelper::sleep(1);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        --time_seconds;
 
         /*
         std::cout << "\r";
@@ -317,7 +323,24 @@ void MTB::delay(std::string appWithParam, unsigned int time) {
     }
     std::cout << std::endl;
     std::cout << "executing " << appWithParam << std::endl;
-    execInNewWindow(appWithParam);
+    execInWindow(appWithParam);
+}
+
+void MTB::createGit() {
+    std::cout << "one day..." << std::endl;
+}
+
+void MTB::downloadWithYt_dlp(std::string url, bool asMp3) {
+    std::string command;
+    if (asMp3)
+        command = "yt-dlp -x --audio-format mp3 " + url;
+    else
+        command = "yt-dlp -f \"bestvideo+bestaudio\" --merge-output-format mp4 " + url;
+    
+    // std::cout << command << std::endl;
+    std::cout << "downloading using yt-dlp..." << std::endl;
+    std::cout << execInWindow("test", false) << std::endl;
+    // std::cout << execInWindow(command, false) << std::endl;
 }
 
 void MTB::test(){
