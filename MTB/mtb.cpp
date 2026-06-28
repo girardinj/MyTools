@@ -7,6 +7,7 @@
 #include <limits>
 #include <thread>
 #include <chrono>
+#include <regex>
 
 #include "os_helper.h"
 
@@ -267,6 +268,8 @@ std::string MTB::exec(std::string command) {
 }
 
 std::string MTB::execInWindow(std::string command, bool newWindow) {
+    // TODO: change to safer thingy (no injection risk)
+    // https://www.boost.org/doc/libs/latest/libs/process/doc/html/index.html
 #ifdef _WIN32
     if (newWindow)
         return exec("start " + command);
@@ -339,8 +342,8 @@ void MTB::downloadWithYt_dlp(std::string url, bool asMp3) {
     
     // std::cout << command << std::endl;
     std::cout << "downloading using yt-dlp..." << std::endl;
-    std::cout << execInWindow("test", false) << std::endl;
-    // std::cout << execInWindow(command, false) << std::endl;
+    // std::cout << execInWindow("test", false) << std::endl;
+    std::cout << execInWindow(command, false) << std::endl;
 }
 
 void MTB::test(){

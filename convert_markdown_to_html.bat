@@ -1,6 +1,6 @@
 @echo off
 
-SET "PYTHON_FILE_LOCATION=C:\MyTools"
+SET "PYTHON_FILE_LOCATION=C:\myTools"
 
 pandoc --version
 IF ERRORLEVEL 1 (
